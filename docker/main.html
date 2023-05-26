@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Folder Size Visualization</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Folder Size Visualization</h1>
+    <div>
+        <label for="subfolders-input">Top X Subfolders:</label>
+        <input id="subfolders-input" type="number" min="1" max="10" value="5">
+        <button id="reload-button" onclick="reloadPage()">Reload</button>
+    </div>
+    <div>
+        <canvas id="pie-chart"></canvas>
+    </div>
+    <div>
+        <canvas id="line-chart"></canvas>
+    </div>
+
+    <script>
+        // Function to fetch folder size data from JSON files
+        async function fetchFolderSizes() {
+            const response = await fetch('/path/to/save/dir');
+            const jsonFiles = await response.json();
+
+            let folderSizes = {};
+
+            // Merge data from all JSON files
+            for (const file of jsonFiles) {
+                const jsonData = await fetch(file);
+                const data = await jsonData.json();
+
+                folderSizes = { ...folderSizes, ...data };
+            }
+
+            return folderSizes;
+        }
+
+        // Function to render the pie chart
+        function renderPieChart(folderSizes) {
+            const labels = Object.keys(folderSizes);
+            const sizes = Object.values(folderSizes);
+
+            const pieChartCanvas = document.getElementById('pie-chart').getContext('2d');
+
+            new Chart(pieChartCanvas, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: sizes,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.6)',
+                            'rgba(54, 162, 235, 0.6)',
+                            'rgba(255, 206, 86, 0.6)',
+                            'rgba(75, 192, 192, 0.6)',
+                            'rgba(153, 102, 255, 0.6)',
+                        ],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        }
+
+        // Function to render the line graph
+        function renderLineGraph(folderSizes, topSubfolders) {
+            const labels = Object.keys(topSubfolders);
+            const datasets = [];
+
+            for (const folder in topSubfolders) {
+                const sizes = topSubfolders[folder];
+                datasets.push({
+                    label: folder,
+                    data: sizes,
+                    fill: false,
+                    borderColor: getRandomColor()
+                });
+            }
+
+            const lineChartCanvas = document.getElementById('line-chart').getContext('2d');
+
+            new Chart(lineChartCanvas, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        }
+
+        // Function to get random colors for line graph
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+
+            return color;
+        }
+
+        // Function to reload the page
+        function reloadPage() {
+            location.reload();
+        }
+
+        // Main function to fetch data and render charts
+        async function main() 
