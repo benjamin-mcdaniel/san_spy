@@ -16,7 +16,7 @@ Literally born out of annoyance that the san is full and the boss is not adding 
 # v2.0 of
 filesize_tracker
 
-#todo
+# todo
 working ui
 graphs in ui
 test data in persistent storage
