@@ -17,8 +17,8 @@ Literally born out of annoyance that the san is full and the boss is not adding 
 filesize_tracker
 
 # todo
-working ui
-graphs in ui
-test data in persistent storage
-add functions to  ui
-print screen / page 
+1. working ui
+2. graphs in ui
+3. test data in persistent storage
+4. add functions to ui buttons
+5. print screen / page feature
