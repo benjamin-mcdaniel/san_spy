@@ -12,3 +12,13 @@ Literally born out of annoyance that the san is full and the boss is not adding 
 # Config
 1. set the depth in the conf.ini, this is how many directories it will check size on. if you just want top level leave it at 1
 2. thats it so far
+
+# v2.0 of
+filesize_tracker
+
+#todo
+working ui
+graphs in ui
+test data in persistent storage
+add functions to  ui
+print screen / page 
