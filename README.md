@@ -3,7 +3,7 @@ who filled up the san? Becky thats who.
 Literally born out of annoyance that the san is full and the boss is not adding another shelf. 
 
 # Status
-In dev, its very early, and i dont have to do this for work anymore, will eventually add to this
+dev, not finished, not even close
 
 # Directions
 1. set the collector.py to run as often as you want via scheduled jobs
